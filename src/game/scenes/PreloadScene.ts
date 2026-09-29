@@ -31,9 +31,9 @@ export class PreloadScene extends Phaser.Scene {
     });
 
     // Load actual memory photo screenshots
-    this.load.image("photo-1", "/assets/photos/photo01.jpg");
-    this.load.image("photo-2", "/assets/photos/photo02.jpg");
-    this.load.image("photo-3", "/assets/photos/photo03.jpg");
+    this.load.image("photo-1", "/assets/photos/photo01.png");
+    this.load.image("photo-2", "/assets/photos/photo02.png");
+    this.load.image("photo-3", "/assets/photos/photo03.png");
 
     // Generate all procedural canvas textures
     this.generateAllProceduralTextures();

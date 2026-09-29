@@ -22,8 +22,7 @@ export class MobileControls extends Phaser.GameObjects.Container {
     this.setupButtons();
     this.reposition();
 
-    // Show on-screen controls by default for touch and mobile, and provide on-screen buttons
-    this.setVisible(true);
+    this.setVisible(false);
 
     this.scene.scale.on("resize", this.onResizeHandler);
     this.scene.events.once(Phaser.Scenes.Events.SHUTDOWN, () => this.destroyControls());

@@ -8,22 +8,12 @@ export class GameHUD extends Phaser.GameObjects.Container {
   private raccoonCounterText!: Phaser.GameObjects.Text;
   private raccoonCounterIcon!: Phaser.GameObjects.Image;
 
-  private sceneBadgeContainer!: Phaser.GameObjects.Container;
-  private sceneBadgeText!: Phaser.GameObjects.Text;
-
-  private soundBtn!: Phaser.GameObjects.Container;
-  private soundIconText!: Phaser.GameObjects.Text;
-
-  private motionBtn!: Phaser.GameObjects.Container;
-  private motionIconText!: Phaser.GameObjects.Text;
-
   public dialogueBox!: DialogueBox;
 
   // Memory modal
   private memoryModalContainer!: Phaser.GameObjects.Container;
   private memoryBackdrop!: Phaser.GameObjects.Graphics;
   private memoryImageSprite!: Phaser.GameObjects.Image;
-  private memoryPlaceholderText!: Phaser.GameObjects.Text;
   private memoryTitleText!: Phaser.GameObjects.Text;
   private memoryMessageText!: Phaser.GameObjects.Text;
   private memoryIndexText!: Phaser.GameObjects.Text;
@@ -38,13 +28,13 @@ export class GameHUD extends Phaser.GameObjects.Container {
   private onResizeHandler = () => this.reposition();
   private isHUDDestroyed: boolean = false;
 
-  constructor(scene: Phaser.Scene, sceneTitle: string = "") {
+  constructor(scene: Phaser.Scene, _sceneTitle: string = "") {
     super(scene, 0, 0);
     this.setScrollFactor(0);
     this.setDepth(200);
     this.scene.add.existing(this);
 
-    this.setupHUD(sceneTitle);
+    this.setupHUD();
     this.setupMemoryModal();
     this.setupNarratorBanner();
     this.dialogueBox = new DialogueBox(scene);
@@ -57,7 +47,7 @@ export class GameHUD extends Phaser.GameObjects.Container {
     this.scene.events.once(Phaser.Scenes.Events.DESTROY, () => this.destroyHUD());
   }
 
-  private setupHUD(sceneTitle: string): void {
+  private setupHUD(): void {
     const gameState = GameState.getInstance();
 
     // 1. Raccoon counter (hidden if 0 found)
@@ -84,88 +74,6 @@ export class GameHUD extends Phaser.GameObjects.Container {
     this.add(this.raccoonCounterContainer);
     this.updateRaccoonCount(gameState.getFoundRaccoonCount());
 
-    // 2. Scene badge
-    if (sceneTitle) {
-      this.sceneBadgeContainer = this.scene.add.container(0, 24);
-      const badgeBg = this.scene.add.graphics();
-      badgeBg.fillStyle(0x071a33, 0.75);
-      badgeBg.fillRoundedRect(-110, 0, 220, 36, 18);
-      badgeBg.lineStyle(1, 0x8dd8ff, 0.4);
-      badgeBg.strokeRoundedRect(-110, 0, 220, 36, 18);
-      this.sceneBadgeContainer.add(badgeBg);
-
-      this.sceneBadgeText = this.scene.add.text(0, 18, sceneTitle.toUpperCase(), {
-        fontFamily: "Plus Jakarta Sans, sans-serif",
-        fontSize: "11px",
-        fontStyle: "700",
-        color: "#8DD8FF",
-        letterSpacing: 1.5,
-      });
-      this.sceneBadgeText.setOrigin(0.5, 0.5);
-      this.sceneBadgeContainer.add(this.sceneBadgeText);
-
-      this.add(this.sceneBadgeContainer);
-    }
-
-    // 3. Audio Mute button
-    this.soundBtn = this.scene.add.container(0, 24);
-    const soundBg = this.scene.add.graphics();
-    soundBg.fillStyle(0x071a33, 0.88);
-    soundBg.fillRoundedRect(-20, 0, 40, 40, 12);
-    soundBg.lineStyle(1.5, 0x168bea, 0.8);
-    soundBg.strokeRoundedRect(-20, 0, 40, 40, 12);
-    this.soundBtn.add(soundBg);
-
-    this.soundIconText = this.scene.add.text(0, 20, gameState.settings.muted ? "🔇" : "🔊", {
-      fontSize: "18px",
-    });
-    this.soundIconText.setOrigin(0.5, 0.5);
-    this.soundBtn.add(this.soundIconText);
-
-    this.soundBtn.setSize(40, 40);
-    this.soundBtn.setInteractive(new Phaser.Geom.Rectangle(-20, 0, 40, 40), Phaser.Geom.Rectangle.Contains);
-    if (this.soundBtn.input) {
-      this.soundBtn.input.cursor = "pointer";
-    }
-    this.soundBtn.on("pointerdown", () => {
-      const isMuted = gameState.toggleMute();
-      this.soundIconText.setText(isMuted ? "🔇" : "🔊");
-    });
-    this.add(this.soundBtn);
-
-    // 4. Motion toggle button
-    this.motionBtn = this.scene.add.container(0, 24);
-    const motionBg = this.scene.add.graphics();
-    motionBg.fillStyle(0x071a33, 0.88);
-    motionBg.fillRoundedRect(-20, 0, 40, 40, 12);
-    motionBg.lineStyle(1.5, 0x168bea, 0.8);
-    motionBg.strokeRoundedRect(-20, 0, 40, 40, 12);
-    this.motionBtn.add(motionBg);
-
-    this.motionIconText = this.scene.add.text(
-      0,
-      20,
-      gameState.settings.reducedMotion ? "⚡" : "✨",
-      { fontSize: "18px" }
-    );
-    this.motionIconText.setOrigin(0.5, 0.5);
-    this.motionBtn.add(this.motionIconText);
-
-    this.motionBtn.setSize(40, 40);
-    this.motionBtn.setInteractive(new Phaser.Geom.Rectangle(-20, 0, 40, 40), Phaser.Geom.Rectangle.Contains);
-    if (this.motionBtn.input) {
-      this.motionBtn.input.cursor = "pointer";
-    }
-    this.motionBtn.on("pointerdown", () => {
-      const isReduced = gameState.toggleReducedMotion();
-      this.motionIconText.setText(isReduced ? "⚡" : "✨");
-      this.dialogueBox.show(
-        isReduced ? "Włączono zredukowany ruch" : "Włączono pełne efekty wizualne",
-        "USTAWIENIA",
-        2000
-      );
-    });
-    this.add(this.motionBtn);
   }
 
   private setupNarratorBanner(): void {
@@ -262,20 +170,8 @@ export class GameHUD extends Phaser.GameObjects.Container {
 
     // Memory Image (if available or stylish artistic representation)
     this.memoryImageSprite = this.scene.add.image(0, -cardHeight / 2 + 160, "memory-photo-art");
-    this.memoryImageSprite.setDisplaySize(cardWidth - 60, 210);
-    this.memoryImageSprite.setAlpha(0.9);
+    this.memoryImageSprite.setScale(Math.min((cardWidth - 60) / this.memoryImageSprite.width, 210 / this.memoryImageSprite.height));
     this.memoryModalContainer.add(this.memoryImageSprite);
-
-    // Placeholder text "[WSPOMNIENIE]"
-    this.memoryPlaceholderText = this.scene.add.text(0, -cardHeight / 2 + 160, "[WSPOMNIENIE]", {
-      fontFamily: "Plus Jakarta Sans, sans-serif",
-      fontSize: "24px",
-      fontStyle: "700",
-      color: "#FFB45C",
-      letterSpacing: 3,
-    });
-    this.memoryPlaceholderText.setOrigin(0.5, 0.5);
-    this.memoryModalContainer.add(this.memoryPlaceholderText);
 
     // Title
     this.memoryTitleText = this.scene.add.text(0, -cardHeight / 2 + 25, "ZACHOWANA CHWILA", {
@@ -415,21 +311,13 @@ export class GameHUD extends Phaser.GameObjects.Container {
     if (this.memoryMessageText) this.memoryMessageText.setText(mem.message || "[WSPOMNIENIE]");
     if (this.memoryIndexText) this.memoryIndexText.setText(`${this.currentMemoryIndex + 1} / ${memories.length}`);
 
-    // If specific photo texture is loaded, show it; else show the stylized memory card
     const photoKey = `photo-${mem.id}`;
     if (this.memoryImageSprite && this.scene.textures) {
-      if (this.scene.textures.exists(photoKey)) {
-        this.memoryImageSprite.setTexture(photoKey);
-        this.memoryImageSprite.setVisible(true);
-        if (this.memoryPlaceholderText) this.memoryPlaceholderText.setVisible(false);
-      } else {
-        this.memoryImageSprite.setTexture("memory-photo-art");
-        this.memoryImageSprite.setVisible(true);
-        if (this.memoryPlaceholderText) {
-          this.memoryPlaceholderText.setVisible(true);
-          this.memoryPlaceholderText.setText(mem.message || "[WSPOMNIENIE]");
-        }
-      }
+      this.memoryImageSprite.setTexture(this.scene.textures.exists(photoKey) ? photoKey : "memory-photo-art");
+      const cardWidth = Math.min(520, this.scene.cameras.main.width - 40);
+      this.memoryImageSprite.setScale(Math.min((cardWidth - 60) / this.memoryImageSprite.width, 210 / this.memoryImageSprite.height));
+      this.memoryImageSprite.setAlpha(1);
+      this.memoryImageSprite.setVisible(true);
     }
   }
 
@@ -496,10 +384,10 @@ export class GameHUD extends Phaser.GameObjects.Container {
     }
     if (!this.raccoonCounterContainer || !this.raccoonCounterText) return;
 
-    if (count > 0) {
-      this.raccoonCounterContainer.setVisible(true);
-      this.raccoonCounterText.setText(`SZOPY ${count}/7`);
+    this.raccoonCounterContainer.setVisible(true);
+    this.raccoonCounterText.setText(`SZOPY ${count}/7`);
 
+    if (count > 0) {
       // Gentle pulse on update
       if (this.scene.tweens) {
         this.scene.tweens.add({
@@ -509,8 +397,6 @@ export class GameHUD extends Phaser.GameObjects.Container {
           ease: "Back.easeOut",
         });
       }
-    } else {
-      this.raccoonCounterContainer.setVisible(false);
     }
   }
 
@@ -564,19 +450,6 @@ export class GameHUD extends Phaser.GameObjects.Container {
     // Raccoon counter top-left
     if (this.raccoonCounterContainer) {
       this.raccoonCounterContainer.setPosition(20, 20);
-    }
-
-    // Scene badge top-center
-    if (this.sceneBadgeContainer) {
-      this.sceneBadgeContainer.setPosition(width / 2, 20);
-    }
-
-    // Top-right buttons
-    if (this.soundBtn) {
-      this.soundBtn.setPosition(width - 40, 20);
-    }
-    if (this.motionBtn) {
-      this.motionBtn.setPosition(width - 90, 20);
     }
 
     // Narrator banner
