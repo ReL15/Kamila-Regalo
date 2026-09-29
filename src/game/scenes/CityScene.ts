@@ -35,13 +35,13 @@ export class CityScene extends Phaser.Scene {
     this.setupRain(height);
     this.setupExitMarker(height);
 
-    this.hud = new GameHUD(this, "Ciudad Europea al Anochecer");
+    this.hud = new GameHUD(this, "Europejskie Miasto o Zmierzchu");
     this.mobileControls = new MobileControls(this, this.truck);
 
     this.time.delayedCall(1200, () => {
-      this.hud.showNarratorQuote("Las luces cálidas de la ciudad reflejadas en el asfalto mojado...", 4500);
+      this.hud.showNarratorQuote("Ciepłe światła miasta odbijające się w mokrym asfalcie...", 4500);
       this.time.delayedCall(5000, () => {
-        this.hud.dialogueBox.show("El mapache mira curioso por la ventana las farolas y los edificios antiguos. 🦝🌧️", "COMPAÑERO", 4000);
+        this.hud.dialogueBox.show("Szop z zaciekawieniem wygląda przez okno na stare kamienice i latarnie. 🦝🌧️", "TOWARZYSZ", 4000);
       });
     });
 
@@ -162,7 +162,7 @@ export class CityScene extends Phaser.Scene {
     gate.strokeRoundedRect(exitX - 95, roadY - 110, 190, 40, 8);
     gate.setDepth(15);
 
-    const gateText = this.add.text(exitX, roadY - 90, "CARRETERA NOCTURNA ▶", {
+    const gateText = this.add.text(exitX, roadY - 90, "NOCNA TRASA ▶", {
       fontFamily: "Plus Jakarta Sans, sans-serif",
       fontSize: "11px",
       fontStyle: "700",

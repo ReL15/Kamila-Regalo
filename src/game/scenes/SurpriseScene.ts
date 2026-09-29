@@ -42,7 +42,7 @@ export class SurpriseScene extends Phaser.Scene {
     this.setupGiftBox(height);
     this.setupRaccoonCollectible(height);
 
-    this.hud = new GameHUD(this, "El Rincón Secreto");
+    this.hud = new GameHUD(this, "Sekretny Zakątek");
     this.mobileControls = new MobileControls(this, this.truck);
 
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
@@ -51,7 +51,7 @@ export class SurpriseScene extends Phaser.Scene {
     });
 
     this.time.delayedCall(1000, () => {
-      this.hud.showNarratorQuote("Un pequeño rincón guardado para el final... 🎁🦝", 4500);
+      this.hud.showNarratorQuote("Mały zakątek zachowany specjalnie na koniec... 🎁🦝", 4500);
     });
   }
 
@@ -138,7 +138,7 @@ export class SurpriseScene extends Phaser.Scene {
     this.giftLidSprite.setDepth(20);
 
     // Interaction prompt
-    this.openPrompt = this.add.text(this.boxX, roadY - 48, "[E] ABRIR", {
+    this.openPrompt = this.add.text(this.boxX, roadY - 48, "[E] OTWÓRZ", {
       fontFamily: "Plus Jakarta Sans, sans-serif",
       fontSize: "13px",
       fontStyle: "700",
@@ -257,7 +257,7 @@ export class SurpriseScene extends Phaser.Scene {
     modal.add(bodyText);
 
     // Subtext
-    const subtext = birthdayConfig.surprise?.subtext || "¡Feliz Cumpleaños, Kamila! 🎂✨";
+    const subtext = birthdayConfig.surprise?.subtext || "Wszystkiego Najlepszego, Kamila! 🎂✨";
     const subLabel = this.add.text(0, cardH / 2 - 100, subtext, {
       fontFamily: "Plus Jakarta Sans, sans-serif",
       fontSize: "14px",
@@ -272,7 +272,7 @@ export class SurpriseScene extends Phaser.Scene {
       this,
       0,
       cardH / 2 - 40,
-      "CONTINUAR AL FINAL ▶",
+      "PRZEJDŹ DO FINAŁU ▶",
       () => {
         this.cameras.main.fadeOut(800, 7, 26, 51);
         this.cameras.main.once("camerafadeoutcomplete", () => {

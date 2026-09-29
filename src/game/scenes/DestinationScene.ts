@@ -16,7 +16,6 @@ export class DestinationScene extends Phaser.Scene {
   private mobileControls!: MobileControls;
   private readonly worldWidth = 2200;
   private isAtOverlook: boolean = false;
-  private letterContainer?: Phaser.GameObjects.Container;
   private falseEndingContainer?: Phaser.GameObjects.Container;
 
   constructor() {
@@ -37,7 +36,7 @@ export class DestinationScene extends Phaser.Scene {
     this.setupPlayer(height);
     this.setupRaccoonCollectible(height);
 
-    this.hud = new GameHUD(this, "El Mirador del Amanecer");
+    this.hud = new GameHUD(this, "Punkt Widokowy o Świcie");
     this.mobileControls = new MobileControls(this, this.truck);
 
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
@@ -47,9 +46,9 @@ export class DestinationScene extends Phaser.Scene {
 
     // Initial narrative
     this.time.delayedCall(1200, () => {
-      this.hud.showNarratorQuote("Después de tantos kilómetros...", 4500);
+      this.hud.showNarratorQuote("Po tylu kilometrach...", 4500);
       this.time.delayedCall(5000, () => {
-        this.hud.showNarratorQuote("...creo que llegamos. 🌅💙", 5000);
+        this.hud.showNarratorQuote("...chyba dotarliśmy na miejsce. 🌅💙", 5000);
       });
     });
   }
@@ -135,7 +134,7 @@ export class DestinationScene extends Phaser.Scene {
     signBg.fillStyle(0x168bea, 1);
     signBg.fillRoundedRect(-50, -16, 100, 32, 6);
     sign.add(signBg);
-    const signText = this.add.text(0, 0, "MIRADOR", {
+    const signText = this.add.text(0, 0, "PUNKT WIDOKOWY", {
       fontFamily: "Plus Jakarta Sans, sans-serif",
       fontSize: "11px",
       fontStyle: "700",
@@ -192,7 +191,7 @@ export class DestinationScene extends Phaser.Scene {
     bannerBg.strokeRoundedRect(-320, -55, 640, 110, 16);
     bannerContainer.add(bannerBg);
 
-    const h1 = this.add.text(0, -18, `FELIZ CUMPLEAÑOS, ${birthdayConfig.name.toUpperCase()} 💙`, {
+    const h1 = this.add.text(0, -18, `WSZYSTKIEGO NAJLEPSZEGO, ${birthdayConfig.name.toUpperCase()} 💙`, {
       fontFamily: "Plus Jakarta Sans, sans-serif",
       fontSize: "22px",
       fontStyle: "800",
@@ -221,14 +220,14 @@ export class DestinationScene extends Phaser.Scene {
       ease: "Quad.easeOut",
     });
 
-    // "LEER CARTA" button
-    const letterBtn = createInteractiveButton(
+    // "DALEJ ▶" button (directly continues without letter reading)
+    const contBtn = createInteractiveButton(
       this,
       width / 2,
       height * 0.44,
-      "LEER CARTA ✉️",
+      "DALEJ ▶",
       () => {
-        this.openLetterModal();
+        this.triggerFalseEnding();
       },
       {
         width: 190,
@@ -239,91 +238,15 @@ export class DestinationScene extends Phaser.Scene {
         radius: 22,
       }
     );
-    letterBtn.setScrollFactor(0);
-    letterBtn.setDepth(160);
-    letterBtn.setAlpha(0);
+    contBtn.setScrollFactor(0);
+    contBtn.setDepth(160);
+    contBtn.setAlpha(0);
 
     this.tweens.add({
-      targets: letterBtn,
+      targets: contBtn,
       alpha: 1,
       duration: 600,
       delay: 500,
-    });
-  }
-
-  private openLetterModal(): void {
-    const width = this.cameras.main.width;
-    const height = this.cameras.main.height;
-
-    this.letterContainer = this.add.container(width / 2, height / 2);
-    this.letterContainer.setScrollFactor(0);
-    this.letterContainer.setDepth(260);
-
-    // Backdrop
-    const backdrop = this.add.graphics();
-    backdrop.fillStyle(0x040d1a, 0.92);
-    backdrop.fillRect(-width, -height, width * 2, height * 2);
-    this.letterContainer.add(backdrop);
-
-    const cardWidth = Math.min(580, width - 36);
-    const cardHeight = Math.min(480, height - 40);
-
-    // Letter parchment card
-    const card = this.add.graphics();
-    card.fillStyle(0x071a33, 0.98);
-    card.fillRoundedRect(-cardWidth / 2, -cardHeight / 2, cardWidth, cardHeight, 18);
-    card.lineStyle(2, 0xffb45c, 0.85);
-    card.strokeRoundedRect(-cardWidth / 2, -cardHeight / 2, cardWidth, cardHeight, 18);
-    this.letterContainer.add(card);
-
-    // Title
-    const title = this.add.text(0, -cardHeight / 2 + 35, birthdayConfig.letter.title, {
-      fontFamily: "Cinzel, serif",
-      fontSize: "20px",
-      fontStyle: "700",
-      color: "#FFB45C",
-      letterSpacing: 2,
-    });
-    title.setOrigin(0.5, 0.5);
-    this.letterContainer.add(title);
-
-    // Body text
-    const body = this.add.text(0, -cardHeight / 2 + 75, birthdayConfig.letter.body, {
-      fontFamily: "Plus Jakarta Sans, sans-serif",
-      fontSize: "14px",
-      color: "#F4F8FC",
-      wordWrap: { width: cardWidth - 55 },
-      lineSpacing: 7,
-    });
-    body.setOrigin(0.5, 0);
-    this.letterContainer.add(body);
-
-    // Continue button
-    const closeBtn = createInteractiveButton(
-      this,
-      0,
-      cardHeight / 2 - 35,
-      "CONTINUAR ▶",
-      () => {
-        this.letterContainer?.destroy();
-        this.triggerFalseEnding();
-      },
-      {
-        width: 170,
-        height: 38,
-        fillColor: 0x168bea,
-        strokeColor: 0x8dd8ff,
-        strokeWidth: 2,
-        radius: 19,
-      }
-    );
-    this.letterContainer.add(closeBtn);
-
-    this.letterContainer.setAlpha(0);
-    this.tweens.add({
-      targets: this.letterContainer,
-      alpha: 1,
-      duration: 300,
     });
   }
 
@@ -341,8 +264,8 @@ export class DestinationScene extends Phaser.Scene {
     bg.fillRect(-width, -height, width * 2, height * 2);
     this.falseEndingContainer.add(bg);
 
-    // "FIN DEL VIAJE"
-    const finText = this.add.text(0, -20, "FIN DEL VIAJE", {
+    // "KONIEC PODRÓŻY"
+    const finText = this.add.text(0, -20, "KONIEC PODRÓŻY", {
       fontFamily: "Cinzel, serif",
       fontSize: "32px",
       fontStyle: "700",
@@ -353,7 +276,7 @@ export class DestinationScene extends Phaser.Scene {
     finText.setAlpha(0);
     this.falseEndingContainer.add(finText);
 
-    // Sequence: Fade in "FIN DEL VIAJE"...
+    // Sequence: Fade in "KONIEC PODRÓŻY"...
     this.tweens.add({
       targets: finText,
       alpha: 1,
@@ -361,7 +284,7 @@ export class DestinationScene extends Phaser.Scene {
       onComplete: () => {
         // Wait...
         this.time.delayedCall(2200, () => {
-          // Fade out "FIN DEL VIAJE"
+          // Fade out "KONIEC PODRÓŻY"
           this.tweens.add({
             targets: finText,
             alpha: 0,
@@ -373,7 +296,7 @@ export class DestinationScene extends Phaser.Scene {
               raccoonPeek.setAlpha(0);
               this.falseEndingContainer?.add(raccoonPeek);
 
-              const waitText = this.add.text(0, 35, "Espera...", {
+              const waitText = this.add.text(0, 35, "Zaraz, chwileczkę...", {
                 fontFamily: "Plus Jakarta Sans, sans-serif",
                 fontSize: "18px",
                 fontStyle: "italic",
@@ -389,14 +312,14 @@ export class DestinationScene extends Phaser.Scene {
                 duration: 600,
                 onComplete: () => {
                   this.time.delayedCall(1600, () => {
-                    waitText.setText("¿CREÍAS QUE ESTE ERA EL DESTINO? 👀");
+                    waitText.setText("CZY NAPRAWDĘ MYŚLISZ, ŻE TO JUŻ KONIEC? 👀");
 
-                    // Show CONTINUAR button
-                    const contBtn = createInteractiveButton(
+                    // Show DALEJ button
+                    const nextBtn = createInteractiveButton(
                       this,
                       0,
                       95,
-                      "CONTINUAR ▶",
+                      "DALEJ ▶",
                       () => {
                         this.cameras.main.fadeOut(500, 7, 26, 51);
                         this.cameras.main.once("camerafadeoutcomplete", () => {
@@ -412,7 +335,7 @@ export class DestinationScene extends Phaser.Scene {
                         radius: 22,
                       }
                     );
-                    this.falseEndingContainer?.add(contBtn);
+                    this.falseEndingContainer?.add(nextBtn);
                   });
                 },
               });

@@ -13,55 +13,55 @@ export const raccoonsConfig: RaccoonConfig[] = [
     sceneKey: "MountainScene",
     x: 1850,
     y: 520,
-    message: "“El viaje apenas comienza.”",
-    hint: "Entre los pinos de la ladera rocosa"
+    message: "„Podróż dopiero się zaczyna.”",
+    hint: "Wśród sosen na kamienistym zboczu"
   },
   {
     id: 2,
     sceneKey: "ForestScene",
     x: 1400,
     y: 530,
-    message: "“Vas encontrando el camino.”",
-    hint: "Bajo la niebla y las hojas doradas"
+    message: "„Krok po kroku odnajdujesz swoją drogę.”",
+    hint: "Pod mgłą i złotymi liśćmi"
   },
   {
     id: 3,
     sceneKey: "MemoryScene",
     x: 1750,
     y: 520,
-    message: "“Este pequeño compañero tiene algo que decirte.”",
-    hint: "Junto al muelle del lago"
+    message: "„Ten mały przyjaciel ma dla Ciebie coś do powiedzenia.”",
+    hint: "Przy pomoście nad jeziorem"
   },
   {
     id: 4,
     sceneKey: "CityScene",
     x: 2100,
     y: 525,
-    message: "“Todavía quedan sorpresas.”",
-    hint: "Bajo una farola de la vieja ciudad"
+    message: "„Przed nami jeszcze wspaniałe niespodzianki.”",
+    hint: "Pod latarnią starego miasta"
   },
   {
     id: 5,
     sceneKey: "NightScene",
     x: 1600,
     y: 520,
-    message: "“Ya casi llegamos.”",
-    hint: "Bajo el cielo estrellado y la luna"
+    message: "„Już prawie jesteśmy na miejscu.”",
+    hint: "Pod rozgwieżdżonym niebem i księżycem"
   },
   {
     id: 6,
     sceneKey: "DestinationScene",
     x: 1450,
     y: 520,
-    message: "“Mira bien...”",
-    hint: "En el mirador de la cumbre"
+    message: "„Spójrz uważnie...”",
+    hint: "Na punkcie widokowym na szczycie"
   },
   {
     id: 7,
     sceneKey: "SurpriseScene",
     x: 820,
     y: 500,
-    message: "“Sabía que los encontrarías todos.”",
-    hint: "Cerca de la caja de regalo"
+    message: "„Wiedziałem, że odnajdziesz nas wszystkich!”",
+    hint: "Obok pudełka z prezentem"
   }
 ];

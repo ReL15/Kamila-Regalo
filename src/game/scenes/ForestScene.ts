@@ -35,14 +35,14 @@ export class ForestScene extends Phaser.Scene {
     this.setupParticles(height);
     this.setupExitMarker(height);
 
-    this.hud = new GameHUD(this, "El Gran Bosque");
+    this.hud = new GameHUD(this, "Wielki Las");
     this.mobileControls = new MobileControls(this, this.truck);
 
     // Narrative quotes
     this.time.delayedCall(1200, () => {
-      this.hud.showNarratorQuote("Quizás por eso tenía sentido hacerte este viaje...", 4200);
+      this.hud.showNarratorQuote("Może właśnie dlatego ta podróż miała sens...", 4200);
       this.time.delayedCall(5000, () => {
-        this.hud.showNarratorQuote("Un poquito de todas esas cosas que te gustan. 🌲🚛", 4500);
+        this.hud.showNarratorQuote("Po trochu ze wszystkiego, co tak bardzo lubisz. 🌲🚛", 4500);
       });
     });
 
@@ -123,7 +123,7 @@ export class ForestScene extends Phaser.Scene {
     heart.setInteractive();
     heart.on("pointerdown", () => {
       GameState.getInstance().discoverEasterEgg("corazón azul escondido");
-      this.hud.dialogueBox.show("¡Has encontrado un corazón azul escondido entre las ramas! 💙", "SECRETO", 3500);
+      this.hud.dialogueBox.show("Odnaleziono niebieskie serce ukryte wśród gałęzi! 💙", "SEKRET", 3500);
       this.tweens.add({
         targets: heart,
         scale: 1.5,
@@ -138,7 +138,7 @@ export class ForestScene extends Phaser.Scene {
     parkedTruck.setScale(0.85);
     parkedTruck.setTint(0x4a78a6);
 
-    const parkedSign = this.add.text(900, roadY - 45, "Área de Descanso", {
+    const parkedSign = this.add.text(900, roadY - 45, "Miejsce Odpoczynku", {
       fontFamily: "Plus Jakarta Sans, sans-serif",
       fontSize: "10px",
       color: "#8DD8FF",
@@ -191,7 +191,7 @@ export class ForestScene extends Phaser.Scene {
     gate.strokeRoundedRect(exitX - 90, roadY - 110, 180, 40, 8);
     gate.setDepth(15);
 
-    const gateText = this.add.text(exitX, roadY - 90, "LAGO DE LOS RECUERDOS ▶", {
+    const gateText = this.add.text(exitX, roadY - 90, "JEZIORO WSPOMNIEŃ ▶", {
       fontFamily: "Plus Jakarta Sans, sans-serif",
       fontSize: "11px",
       fontStyle: "700",

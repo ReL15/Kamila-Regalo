@@ -34,7 +34,7 @@ export class MountainScene extends Phaser.Scene {
     this.setupExitMarker(height);
 
     // Setup HUD & Mobile controls
-    this.hud = new GameHUD(this, "Las Montañas del Inicio");
+    this.hud = new GameHUD(this, "Góry Początku");
     this.mobileControls = new MobileControls(this, this.truck);
 
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
@@ -44,9 +44,9 @@ export class MountainScene extends Phaser.Scene {
 
     // Narrative texts
     this.time.delayedCall(1200, () => {
-      this.hud.showNarratorQuote("Todo viaje tiene un comienzo...", 4000);
+      this.hud.showNarratorQuote("Każda podróż ma swój początek...", 4000);
       this.time.delayedCall(4800, () => {
-        this.hud.showNarratorQuote("Y este comenzó pensando en alguien muy especial. 💙", 4500);
+        this.hud.showNarratorQuote("A ta zaczęła się z myślą o kimś wyjątkowym. 💙", 4500);
       });
     });
   }
@@ -117,7 +117,7 @@ export class MountainScene extends Phaser.Scene {
     sign1.setInteractive();
     sign1.on("pointerdown", () => {
       GameState.getInstance().discoverEasterEgg("señal secreta");
-      this.hud.dialogueBox.show("Señal de ruta: 'Para Kamila, con todo el cariño'", "CARRETERA", 3000);
+      this.hud.dialogueBox.show("Znak na trasie: 'Dla Kamili, z całego serca'", "TRASA", 3000);
     });
 
     const sign2 = this.add.image(1500, roadY - 25, "scenery-road-sign");
@@ -152,7 +152,7 @@ export class MountainScene extends Phaser.Scene {
     gate.strokeRoundedRect(exitX - 80, roadY - 110, 160, 40, 8);
     gate.setDepth(15);
 
-    const gateText = this.add.text(exitX, roadY - 90, "EL GRAN BOSQUE ▶", {
+    const gateText = this.add.text(exitX, roadY - 90, "WIELKI LAS ▶", {
       fontFamily: "Plus Jakarta Sans, sans-serif",
       fontSize: "12px",
       fontStyle: "700",

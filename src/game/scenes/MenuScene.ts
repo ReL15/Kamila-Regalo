@@ -55,7 +55,7 @@ export class MenuScene extends Phaser.Scene {
     });
     title.setOrigin(0.5, 0.5);
 
-    const subTitle = this.add.text(width / 2, height * 0.4, "— EL VIAJE —", {
+    const subTitle = this.add.text(width / 2, height * 0.4, "— PODRÓŻ —", {
       fontFamily: "Plus Jakarta Sans, sans-serif",
       fontSize: "20px",
       fontStyle: "700",
@@ -87,15 +87,15 @@ export class MenuScene extends Phaser.Scene {
       });
     };
 
-    // INICIAR VIAJE Button
+    // ROZPOCZNIJ PODRÓŻ Button
     const btnContainer = createInteractiveButton(
       this,
       width / 2,
       height * 0.70,
-      "INICIAR VIAJE",
+      "ROZPOCZNIJ PODRÓŻ",
       startJourney,
       {
-        width: 240,
+        width: 260,
         height: 52,
         fillColor: 0x168bea,
         strokeColor: 0x8dd8ff,
@@ -115,7 +115,7 @@ export class MenuScene extends Phaser.Scene {
     });
 
     // Helper hint
-    const hint = this.add.text(width / 2, height * 0.77, "Toca o presiona ESPACIO para comenzar", {
+    const hint = this.add.text(width / 2, height * 0.77, "Dotknij ekranu lub naciśnij SPACJĘ, aby rozpocząć", {
       fontFamily: "Plus Jakarta Sans, sans-serif",
       fontSize: "12px",
       color: "#8DD8FF",
@@ -125,7 +125,7 @@ export class MenuScene extends Phaser.Scene {
     // Raccoon badge if saved progress
     const foundRaccoons = GameState.getInstance().getFoundRaccoonCount();
     if (foundRaccoons > 0) {
-      const savedInfo = this.add.text(width / 2, height * 0.85, `Progreso guardado: ${foundRaccoons}/7 mapaches encontrados`, {
+      const savedInfo = this.add.text(width / 2, height * 0.85, `Zapisany postęp: ${foundRaccoons}/7 znalezionych szopów`, {
         fontFamily: "Plus Jakarta Sans, sans-serif",
         fontSize: "12px",
         color: "#FFB45C",

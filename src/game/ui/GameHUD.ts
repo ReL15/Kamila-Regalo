@@ -73,7 +73,7 @@ export class GameHUD extends Phaser.GameObjects.Container {
     this.raccoonCounterIcon.setScale(0.8);
     this.raccoonCounterContainer.add(this.raccoonCounterIcon);
 
-    this.raccoonCounterText = this.scene.add.text(48, 12, "MAPACHES 0/7", {
+    this.raccoonCounterText = this.scene.add.text(48, 12, "SZOPY 0/7", {
       fontFamily: "Plus Jakarta Sans, sans-serif",
       fontSize: "13px",
       fontStyle: "700",
@@ -160,8 +160,8 @@ export class GameHUD extends Phaser.GameObjects.Container {
       const isReduced = gameState.toggleReducedMotion();
       this.motionIconText.setText(isReduced ? "⚡" : "✨");
       this.dialogueBox.show(
-        isReduced ? "Movimiento reducido activado" : "Efectos visuales completos activados",
-        "AJUSTES",
+        isReduced ? "Włączono zredukowany ruch" : "Włączono pełne efekty wizualne",
+        "USTAWIENIA",
         2000
       );
     });
@@ -266,8 +266,8 @@ export class GameHUD extends Phaser.GameObjects.Container {
     this.memoryImageSprite.setAlpha(0.9);
     this.memoryModalContainer.add(this.memoryImageSprite);
 
-    // Placeholder text "[RECUERDO]"
-    this.memoryPlaceholderText = this.scene.add.text(0, -cardHeight / 2 + 160, "[RECUERDO]", {
+    // Placeholder text "[WSPOMNIENIE]"
+    this.memoryPlaceholderText = this.scene.add.text(0, -cardHeight / 2 + 160, "[WSPOMNIENIE]", {
       fontFamily: "Plus Jakarta Sans, sans-serif",
       fontSize: "24px",
       fontStyle: "700",
@@ -278,7 +278,7 @@ export class GameHUD extends Phaser.GameObjects.Container {
     this.memoryModalContainer.add(this.memoryPlaceholderText);
 
     // Title
-    this.memoryTitleText = this.scene.add.text(0, -cardHeight / 2 + 25, "UN MOMENTO GUARDADO", {
+    this.memoryTitleText = this.scene.add.text(0, -cardHeight / 2 + 25, "ZACHOWANA CHWILA", {
       fontFamily: "Plus Jakarta Sans, sans-serif",
       fontSize: "16px",
       fontStyle: "700",
@@ -288,7 +288,7 @@ export class GameHUD extends Phaser.GameObjects.Container {
     this.memoryModalContainer.add(this.memoryTitleText);
 
     // Message
-    this.memoryMessageText = this.scene.add.text(0, -cardHeight / 2 + 300, "[RECUERDO]", {
+    this.memoryMessageText = this.scene.add.text(0, -cardHeight / 2 + 300, "[WSPOMNIENIE]", {
       fontFamily: "Plus Jakarta Sans, sans-serif",
       fontSize: "14px",
       color: "#F4F8FC",
@@ -300,7 +300,7 @@ export class GameHUD extends Phaser.GameObjects.Container {
     this.memoryModalContainer.add(this.memoryMessageText);
 
     // Pagination index text
-    this.memoryIndexText = this.scene.add.text(0, cardHeight / 2 - 55, "1 / 5", {
+    this.memoryIndexText = this.scene.add.text(0, cardHeight / 2 - 55, "1 / 3", {
       fontFamily: "Plus Jakarta Sans, sans-serif",
       fontSize: "12px",
       color: "#8DD8FF",
@@ -308,20 +308,20 @@ export class GameHUD extends Phaser.GameObjects.Container {
     this.memoryIndexText.setOrigin(0.5, 0.5);
     this.memoryModalContainer.add(this.memoryIndexText);
 
-    // Prev Button (Anterior)
-    const btnPrev = this.createModalButton("◀ ANTERIOR", -110, cardHeight / 2 - 25, 110, 36, () => {
+    // Prev Button (Poprzednie)
+    const btnPrev = this.createModalButton("◀ POPRZEDNIE", -110, cardHeight / 2 - 25, 110, 36, () => {
       this.navigateMemory(-1);
     });
     this.memoryModalContainer.add(btnPrev);
 
-    // Next Button (Siguiente)
-    const btnNext = this.createModalButton("SIGUIENTE ▶", 110, cardHeight / 2 - 25, 110, 36, () => {
+    // Next Button (Następne)
+    const btnNext = this.createModalButton("NASTĘPNE ▶", 110, cardHeight / 2 - 25, 110, 36, () => {
       this.navigateMemory(1);
     });
     this.memoryModalContainer.add(btnNext);
 
-    // Close Button (✕ Cerrar)
-    const btnClose = this.createModalButton("CERRAR ✕", 0, cardHeight / 2 - 25, 80, 36, () => {
+    // Close Button (✕ Zamknij)
+    const btnClose = this.createModalButton("ZAMKNIJ ✕", 0, cardHeight / 2 - 25, 80, 36, () => {
       this.closeMemoryModal();
     });
     this.memoryModalContainer.add(btnClose);
@@ -412,7 +412,7 @@ export class GameHUD extends Phaser.GameObjects.Container {
     const mem: MemoryItem = memories[this.currentMemoryIndex];
     if (!mem) return;
     if (this.memoryTitleText) this.memoryTitleText.setText(mem.title.toUpperCase());
-    if (this.memoryMessageText) this.memoryMessageText.setText(mem.message || "[RECUERDO]");
+    if (this.memoryMessageText) this.memoryMessageText.setText(mem.message || "[WSPOMNIENIE]");
     if (this.memoryIndexText) this.memoryIndexText.setText(`${this.currentMemoryIndex + 1} / ${memories.length}`);
 
     // If specific photo texture is loaded, show it; else show the stylized memory card
@@ -427,7 +427,7 @@ export class GameHUD extends Phaser.GameObjects.Container {
         this.memoryImageSprite.setVisible(true);
         if (this.memoryPlaceholderText) {
           this.memoryPlaceholderText.setVisible(true);
-          this.memoryPlaceholderText.setText(mem.message || "[RECUERDO]");
+          this.memoryPlaceholderText.setText(mem.message || "[WSPOMNIENIE]");
         }
       }
     }
@@ -468,7 +468,7 @@ export class GameHUD extends Phaser.GameObjects.Container {
         };
         this.updateRaccoonCount(payload.count);
         if (this.dialogueBox && typeof this.dialogueBox.show === "function") {
-          this.dialogueBox.show(payload.message, "MAPACHE ENCONTRADO", 4500);
+          this.dialogueBox.show(payload.message, "ZNALEZIONO SZOPA", 4500);
         }
 
         if (payload.isAllFound) {
@@ -480,7 +480,7 @@ export class GameHUD extends Phaser.GameObjects.Container {
     this.scene.events.on("show-raccoon-dialogue", (data: { message: string }) => {
       if (this.isHUDDestroyed || !this.scene || !this.scene.sys || !this.scene.sys.isActive()) return;
       if (this.dialogueBox && typeof this.dialogueBox.show === "function") {
-        this.dialogueBox.show(data.message, "COMPAÑERO DE RUTA", 4500);
+        this.dialogueBox.show(data.message, "TOWARZYSZ PODRÓŻY", 4500);
       }
     });
 
@@ -498,7 +498,7 @@ export class GameHUD extends Phaser.GameObjects.Container {
 
     if (count > 0) {
       this.raccoonCounterContainer.setVisible(true);
-      this.raccoonCounterText.setText(`MAPACHES ${count}/7`);
+      this.raccoonCounterText.setText(`SZOPY ${count}/7`);
 
       // Gentle pulse on update
       if (this.scene.tweens) {
@@ -550,7 +550,7 @@ export class GameHUD extends Phaser.GameObjects.Container {
     }
 
     if (this.dialogueBox && typeof this.dialogueBox.show === "function") {
-      this.dialogueBox.show("¡Has encontrado a todos los 7 mapaches del camino! 🦝💙", "¡CELEBRACIÓN!", 5000);
+      this.dialogueBox.show("Odnaleziono wszystkie 7 szopów na trasie! 🦝💙", "ŚWIĘTOWANIE!", 5000);
     }
   }
 

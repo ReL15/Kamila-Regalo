@@ -1,5 +1,6 @@
 import Phaser from "phaser";
 import { Truck } from "../entities/Truck";
+import { AudioManager } from "../systems/AudioManager";
 
 export class MobileControls extends Phaser.GameObjects.Container {
   private truck: Truck;
@@ -15,7 +16,7 @@ export class MobileControls extends Phaser.GameObjects.Container {
     super(scene, 0, 0);
     this.truck = truck;
     this.setScrollFactor(0);
-    this.setDepth(90);
+    this.setDepth(150);
     this.scene.add.existing(this);
 
     this.setupButtons();
@@ -119,7 +120,7 @@ export class MobileControls extends Phaser.GameObjects.Container {
 
     // Brake
     this.btnBrake = this.createButton(
-      "FRENAR",
+      "HAMUJ",
       70,
       48,
       0x331010,
@@ -130,7 +131,7 @@ export class MobileControls extends Phaser.GameObjects.Container {
 
     // Interact [E]
     this.btnInteract = this.createButton(
-      "ACCION [E]",
+      "AKCJA [E]",
       100,
       54,
       0x168bea,
@@ -138,13 +139,16 @@ export class MobileControls extends Phaser.GameObjects.Container {
     );
     this.add(this.btnInteract);
 
-    // Honk
+    // Honk (Klakson)
     this.btnHonk = this.createButton(
       "📯",
-      48,
-      48,
+      52,
+      52,
       0x183c38,
-      () => this.truck.honk()
+      () => {
+        AudioManager.getInstance().unlock();
+        this.truck.honk();
+      }
     );
     this.add(this.btnHonk);
   }

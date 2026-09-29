@@ -37,7 +37,7 @@ export class MemoryScene extends Phaser.Scene {
     this.setupRaccoon(height);
     this.setupExitMarker(height);
 
-    this.hud = new GameHUD(this, "El Lago de los Recuerdos");
+    this.hud = new GameHUD(this, "Jezioro Wspomnień");
     this.mobileControls = new MobileControls(this, this.truck);
 
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
@@ -47,7 +47,7 @@ export class MemoryScene extends Phaser.Scene {
 
     // Narrative quote
     this.time.delayedCall(1200, () => {
-      this.hud.showNarratorQuote("Algunas cosas merecen quedarse en el camino... 🌅", 4800);
+      this.hud.showNarratorQuote("Niektóre chwile zasługują na to, by pozostać na zawsze... 🌅", 4800);
     });
   }
 
@@ -113,11 +113,11 @@ export class MemoryScene extends Phaser.Scene {
 
   private setupMemoryObjects(height: number): void {
     const roadY = height - 85;
-    // 5 interactive memory items along the lake
-    const xPositions = [450, 950, 1420, 1980, 2380];
+    // 3 interactive memory items along the lake
+    const xPositions = [650, 1350, 2050];
 
     memories.forEach((mem, index) => {
-      const x = xPositions[index] || 500 + index * 450;
+      const x = xPositions[index] || 600 + index * 600;
       const memObj = new MemoryObject(this, x, roadY, mem, "icon-memory-camera");
       memObj.setDepth(18);
       this.memoryObjects.push(memObj);
@@ -126,8 +126,8 @@ export class MemoryScene extends Phaser.Scene {
 
   private setupRaccoon(height: number): void {
     const roadY = height - 95;
-    // Raccoon #3 hidden near lake overlook dock at x = 1750
-    this.raccoonCollectible = new CollectibleRaccoon(this, 1750, roadY, 3);
+    // Raccoon #3 hidden near lake overlook dock at x = 1680
+    this.raccoonCollectible = new CollectibleRaccoon(this, 1680, roadY, 3);
     this.raccoonCollectible.setDepth(25);
   }
 
@@ -142,7 +142,7 @@ export class MemoryScene extends Phaser.Scene {
     gate.strokeRoundedRect(exitX - 85, roadY - 110, 170, 40, 8);
     gate.setDepth(15);
 
-    const gateText = this.add.text(exitX, roadY - 90, "HACIA LA CIUDAD ▶", {
+    const gateText = this.add.text(exitX, roadY - 90, "W STRONĘ MIASTA ▶", {
       fontFamily: "Plus Jakarta Sans, sans-serif",
       fontSize: "12px",
       fontStyle: "700",

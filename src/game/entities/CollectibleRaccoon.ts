@@ -55,7 +55,7 @@ export class CollectibleRaccoon extends Phaser.GameObjects.Container {
     });
 
     // Prompt indicator
-    this.promptText = this.scene.add.text(0, -42, "[E] Saludar", {
+    this.promptText = this.scene.add.text(0, -42, "[E] Przywitaj się", {
       fontFamily: "Plus Jakarta Sans, sans-serif",
       fontSize: "12px",
       color: "#FFB45C",
@@ -97,7 +97,7 @@ export class CollectibleRaccoon extends Phaser.GameObjects.Container {
 
     const gameState = GameState.getInstance();
     const config = raccoonsConfig.find((r) => r.id === this.raccoonId);
-    const message = config ? config.message : "¡Un pequeño amigo en el camino!";
+    const message = config ? config.message : "Mały przyjaciel na trasie!";
 
     const result = gameState.collectRaccoon(this.raccoonId);
     this.isCollected = true;

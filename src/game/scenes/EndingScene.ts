@@ -82,8 +82,8 @@ export class EndingScene extends Phaser.Scene {
   }
 
   private runEndingTextSequence(width: number, height: number): void {
-    // 1. "Y así termina este viaje..."
-    const line1 = this.add.text(width / 2, height * 0.26, "Y así termina este viaje...", {
+    // 1. "I tak kończy się ta podróż..."
+    const line1 = this.add.text(width / 2, height * 0.26, "I tak kończy się ta podróż...", {
       fontFamily: "Plus Jakarta Sans, sans-serif",
       fontSize: "18px",
       fontStyle: "500",
@@ -92,8 +92,8 @@ export class EndingScene extends Phaser.Scene {
     line1.setOrigin(0.5, 0.5);
     line1.setAlpha(0);
 
-    // 2. "...por ahora."
-    const line2 = this.add.text(width / 2, height * 0.32, "...por ahora.", {
+    // 2. "...na razie."
+    const line2 = this.add.text(width / 2, height * 0.32, "...na razie.", {
       fontFamily: "Plus Jakarta Sans, sans-serif",
       fontSize: "18px",
       fontStyle: "italic",
@@ -102,8 +102,8 @@ export class EndingScene extends Phaser.Scene {
     line2.setOrigin(0.5, 0.5);
     line2.setAlpha(0);
 
-    // 3. "FELIZ CUMPLEAÑOS, KAMILA"
-    const line3 = this.add.text(width / 2, height * 0.42, `FELIZ CUMPLEAÑOS, ${birthdayConfig.name.toUpperCase()}`, {
+    // 3. "WSZYSTKIEGO NAJLEPSZEGO, KAMILA"
+    const line3 = this.add.text(width / 2, height * 0.42, `WSZYSTKIEGO NAJLEPSZEGO, ${birthdayConfig.name.toUpperCase()}`, {
       fontFamily: "Cinzel, serif",
       fontSize: Math.min(36, width * 0.08) + "px",
       fontStyle: "700",
@@ -113,8 +113,8 @@ export class EndingScene extends Phaser.Scene {
     line3.setOrigin(0.5, 0.5);
     line3.setAlpha(0);
 
-    // 4. "Nos vemos en la próxima ruta. 🚛🦝"
-    const line4 = this.add.text(width / 2, height * 0.50, "Nos vemos en la próxima ruta. 🚛🦝", {
+    // 4. "Do zobaczenia na kolejnej trasie. 🚛🦝"
+    const line4 = this.add.text(width / 2, height * 0.50, "Do zobaczenia na kolejnej trasie. 🚛🦝", {
       fontFamily: "Plus Jakarta Sans, sans-serif",
       fontSize: "16px",
       fontStyle: "600",
@@ -163,7 +163,7 @@ export class EndingScene extends Phaser.Scene {
       this,
       width / 2,
       height * 0.62,
-      "VOLVER A JUGAR 🔄",
+      "ZAGRAJ PONOWNIE 🔄",
       () => {
         this.cameras.main.fadeOut(800, 7, 26, 51);
         this.cameras.main.once("camerafadeoutcomplete", () => {
@@ -182,7 +182,7 @@ export class EndingScene extends Phaser.Scene {
     replayContainer.setAlpha(0);
 
     // Reset progress option
-    const resetText = this.add.text(width / 2, height * 0.70, "Reiniciar mapaches y recuerdos", {
+    const resetText = this.add.text(width / 2, height * 0.70, "Zresetuj szopy i wspomnienia", {
       fontFamily: "Plus Jakarta Sans, sans-serif",
       fontSize: "12px",
       color: "#8DD8FF",
@@ -191,7 +191,7 @@ export class EndingScene extends Phaser.Scene {
     resetText.setInteractive({ useHandCursor: true });
     resetText.on("pointerdown", () => {
       GameState.getInstance().resetProgress();
-      resetText.setText("¡Progreso reiniciado! ✓");
+      resetText.setText("Postęp zresetowany! ✓");
       resetText.setColor("#FFB45C");
     });
 

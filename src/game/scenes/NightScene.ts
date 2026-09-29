@@ -33,7 +33,7 @@ export class NightScene extends Phaser.Scene {
     this.setupRaccoon(height);
     this.setupExitMarker(height);
 
-    this.hud = new GameHUD(this, "La Noche y las Estrellas");
+    this.hud = new GameHUD(this, "Noc i Gwiazdy");
     this.mobileControls = new MobileControls(this, this.truck);
 
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
@@ -43,9 +43,9 @@ export class NightScene extends Phaser.Scene {
 
     // Deep narrative quote held for several seconds
     this.time.delayedCall(1400, () => {
-      this.hud.showNarratorQuote("A veces no importa tanto el destino...", 5500);
+      this.hud.showNarratorQuote("Czasami nie cel jest najważniejszy...", 5500);
       this.time.delayedCall(6500, () => {
-        this.hud.showNarratorQuote("Lo bonito es tener a alguien con quien recorrer el camino. ✨", 7000);
+        this.hud.showNarratorQuote("Piękne jest to, że masz z kim przemierzać drogę. ✨", 7000);
       });
     });
   }
@@ -95,7 +95,7 @@ export class NightScene extends Phaser.Scene {
     specialStar.setInteractive();
     specialStar.on("pointerdown", () => {
       GameState.getInstance().discoverEasterEgg("estrella especial");
-      this.hud.dialogueBox.show("¡Has descubierto la estrella más brillante de la noche! ⭐✨", "CIELO NOCTURNO", 4000);
+      this.hud.dialogueBox.show("Odkryto najjaśniejszą gwiazdę tej nocy! ⭐✨", "NOCNE NIEBO", 4000);
       this.tweens.add({
         targets: specialStar,
         scale: 1.8,
@@ -170,7 +170,7 @@ export class NightScene extends Phaser.Scene {
     gate.strokeRoundedRect(exitX - 85, roadY - 110, 170, 40, 8);
     gate.setDepth(15);
 
-    const gateText = this.add.text(exitX, roadY - 90, "EL ÚLTIMO TRAMO ▶", {
+    const gateText = this.add.text(exitX, roadY - 90, "OSTATNI ODCINEK ▶", {
       fontFamily: "Plus Jakarta Sans, sans-serif",
       fontSize: "12px",
       fontStyle: "700",

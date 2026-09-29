@@ -44,7 +44,7 @@ export class DialogueBox extends Phaser.GameObjects.Container {
     this.add(this.avatarImage);
 
     // Speaker name
-    this.speakerText = this.scene.add.text(-width / 2 + 110, -36, "COMPAÑERO DE RUTA", {
+    this.speakerText = this.scene.add.text(-width / 2 + 110, -36, "TOWARZYSZ PODRÓŻY", {
       fontFamily: "Plus Jakarta Sans, sans-serif",
       fontSize: "12px",
       fontStyle: "700",
@@ -63,7 +63,7 @@ export class DialogueBox extends Phaser.GameObjects.Container {
     this.add(this.messageText);
 
     // Dismiss hint
-    this.hintText = this.scene.add.text(width / 2 - 20, height / 2 - 20, "Toca para cerrar", {
+    this.hintText = this.scene.add.text(width / 2 - 20, height / 2 - 20, "Dotknij, aby zamknąć", {
       fontFamily: "Plus Jakarta Sans, sans-serif",
       fontSize: "11px",
       color: "#8DD8FF",
@@ -80,7 +80,7 @@ export class DialogueBox extends Phaser.GameObjects.Container {
     this.on("pointerdown", () => this.hide());
   }
 
-  public show(message: string, speaker: string = "COMPAÑERO DE RUTA", durationMs: number = 4500): void {
+  public show(message: string, speaker: string = "TOWARZYSZ PODRÓŻY", durationMs: number = 4500): void {
     if (this.isDestroyedBox || !this.scene || !this.scene.sys || !this.scene.sys.isActive() || !this.scene.tweens || !this.scene.cameras || !this.scene.cameras.main) {
       return;
     }

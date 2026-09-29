@@ -53,7 +53,7 @@ export class MemoryObject extends Phaser.GameObjects.Container {
     });
 
     // Title label
-    this.titleLabel = this.scene.add.text(0, -38, this.memory.subtitle || `Recuerdo #${this.memory.id}`, {
+    this.titleLabel = this.scene.add.text(0, -38, this.memory.subtitle || `Wspomnienie #${this.memory.id}`, {
       fontFamily: "Plus Jakarta Sans, sans-serif",
       fontSize: "11px",
       fontStyle: "600",
@@ -63,7 +63,7 @@ export class MemoryObject extends Phaser.GameObjects.Container {
     this.add(this.titleLabel);
 
     // Prompt
-    this.promptText = this.scene.add.text(0, -56, "[E] Ver recuerdo", {
+    this.promptText = this.scene.add.text(0, -56, "[E] Zobacz wspomnienie", {
       fontFamily: "Plus Jakarta Sans, sans-serif",
       fontSize: "12px",
       color: "#FFFFFF",

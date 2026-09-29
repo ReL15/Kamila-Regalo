@@ -100,7 +100,7 @@ export class IntroScene extends Phaser.Scene {
       this,
       width / 2,
       height * 0.62,
-      "ENCENDER MOTOR 🚛",
+      "ODPAL SILNIK 🚛",
       ignite,
       {
         width: 240,

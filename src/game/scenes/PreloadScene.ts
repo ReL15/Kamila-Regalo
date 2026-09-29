@@ -15,7 +15,7 @@ export class PreloadScene extends Phaser.Scene {
     progressBox.fillStyle(0x0b3d66, 0.8);
     progressBox.fillRoundedRect(width / 2 - 160, height / 2 - 14, 320, 28, 14);
 
-    const loadingText = this.add.text(width / 2, height / 2 - 40, "PREPARANDO LA RUTA...", {
+    const loadingText = this.add.text(width / 2, height / 2 - 40, "PRZYGOTOWYWANIE TRASY...", {
       fontFamily: "Plus Jakarta Sans, sans-serif",
       fontSize: "14px",
       fontStyle: "700",
@@ -29,6 +29,11 @@ export class PreloadScene extends Phaser.Scene {
       progressBar.fillStyle(0x168bea, 1);
       progressBar.fillRoundedRect(width / 2 - 156, height / 2 - 10, 312 * value, 20, 10);
     });
+
+    // Load actual memory photo screenshots
+    this.load.image("photo-1", "/assets/photos/photo01.jpg");
+    this.load.image("photo-2", "/assets/photos/photo02.jpg");
+    this.load.image("photo-3", "/assets/photos/photo03.jpg");
 
     // Generate all procedural canvas textures
     this.generateAllProceduralTextures();
